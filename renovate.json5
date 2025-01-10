@@ -12,13 +12,15 @@
                 'com.android.tools:r8'
             ],
             overrideDatasource: 'custom.r8',
-            extractVersion: '"message": "Version (?<version>[^-\\n]+)',
         },
     ],
     customDatasources: {
         r8: {
             defaultRegistryUrlTemplate: 'https://r8.googlesource.com/r8/+log/refs/heads/8.8/src/main/java/com/android/tools/r8/Version.java?format=JSON',
             format: 'plain',
+            transformTemplates: [
+                '{"releases": releases.{"version": $match(version, /^"message": "Version (?<version>[^-\\n]+)/).groups[0]}[version]}'
+            ]
         }
     },
     logLevelRemap: [
