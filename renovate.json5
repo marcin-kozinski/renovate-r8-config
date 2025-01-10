@@ -3,28 +3,22 @@
     extends: [
         'config:best-practices',
         ':disableDependencyDashboard',
-        ':automergeAll',
+        ':automergeAll'
     ],
     platformAutomerge: true,
-    customManagers: [
+    packageRules: [
         {
-            customType: 'regex',
-            fileMatch: [
-                'gradle/libs.versions.toml'
+            matchPackageNames: [
+                'com.android.tools:r8'
             ],
-            matchStrings: [
-                '(?<depName>.*?) = { module = \"com.android.tools:r8\", version = \"(?<currentValue>.*?)\" }\\n'
-            ],
-            versioningTemplate: 'maven',
-            datasourceTemplate: 'custom.r8',
+            overrideDatasource: 'custom.r8',
+            extractVersion: '^Version (?<version>[^-]+)',
         },
     ],
     customDatasources: {
         r8: {
             defaultRegistryUrlTemplate: 'https://r8.googlesource.com/r8/+log/refs/heads/8.8/src/main/java/com/android/tools/r8/Version.java',
-            transformTemplates: [
-                '{\n    \"releases\": log[$match(message, /^Version (\\d+\\.\\d+\\.\\d+)\\n/)].\n        {\n            \"version\": $match(message, /^Version (\\d+\\.\\d+\\.\\d+)\\n/)[0].groups[0]\n        }\n}\n'
-            ]
+            format: 'html',
         }
     },
     logLevelRemap: [
