@@ -12,7 +12,6 @@
                 'com.android.tools:r8'
             ],
             overrideDatasource: 'custom.r8',
-            versioning: 'semver-coerced',
         },
     ],
     customDatasources: {
