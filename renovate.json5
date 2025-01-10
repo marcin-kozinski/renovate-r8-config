@@ -12,7 +12,7 @@
                 'com.android.tools:r8'
             ],
             overrideDatasource: 'custom.r8',
-            extractVersion: '"message": "Version (?<version>[^-]+)\n',
+            extractVersion: '"message": "Version (?<version>[^-\\n]+)',
         },
     ],
     customDatasources: {
