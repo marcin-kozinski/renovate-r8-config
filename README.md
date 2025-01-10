@@ -1,0 +1,1 @@
+# renovate-r8-config
