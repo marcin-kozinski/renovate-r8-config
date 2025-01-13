@@ -1,5 +1,0 @@
-[libraries]
-r8 = { module = "com.android.tools:r8", version = "8.8.18" }
-
-[plugins]
-android-application = { id = "com.android.application", version = "8.8.0" }
