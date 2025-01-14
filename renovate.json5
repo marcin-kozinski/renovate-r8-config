@@ -21,7 +21,15 @@
         r8: {
             format: 'plain',
             transformTemplates: [
-                '{"releases": $split(releases[0].version, "<li class=\"CommitLog-item ").($match(/([^\"\/]+)\">Version ([0-9\.]+)<\/a>/)).{"digest": groups[0], "version": groups[1], "isStable": true}}'
+                '{\
+                    "releases": $split(releases[0].version, "<li class=\\"CommitLog-item ")\
+                        .($match(/([^"\\/]+)">Version ([0-9\\.]+)<\\/a>/))\
+                        .{\
+                            "digest": groups[0],\
+                            "version": groups[1],\
+                            "isStable": true\
+                        }\
+                }'
             ]
         }
     },
